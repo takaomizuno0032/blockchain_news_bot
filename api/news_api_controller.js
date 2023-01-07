@@ -7,7 +7,7 @@ const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 const moment = require('moment');
 
 // get today's headline news of blockchain
-function getHeadlinesUrl() {
+export function getHeadlines() {
     newsapi.v2.topHeadlines({
         q: 'blockchain',
         language: 'en',
@@ -23,7 +23,7 @@ function getHeadlinesUrl() {
 }
 
 // get top 5 today's news of blockchain 
-function getTopFiveNews() {
+export function getTopFiveNews() {
     today = moment(new Date()).format("YYYY-MM-DD");
     newsapi.v2.everything({
         q: 'blockchain',

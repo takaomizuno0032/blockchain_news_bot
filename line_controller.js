@@ -1,10 +1,11 @@
+require('dotenv').config();
 const NewsApi = require('./api/news_api_controller.js')
 
 class LineController {
-    replyTopNews(client, event) {
+    getTopNews() {
         var newsApi = new NewsApi();
         var messages = [];
-        var reply = async (event) => {
+        var get = async () => {
             const news = await newsApi.getPoluparNews();
             var title = {
                 type: 'text',
@@ -22,12 +23,9 @@ class LineController {
             messages.push(description)
             messages.push(url);
 
-            return client.replyMessage(event.replyToken, {
-                type: 'text',
-                text: messages
-            });
+            return messages;
         }
-        reply(event);
+        get();
     }
 
     // pushNews(client) {

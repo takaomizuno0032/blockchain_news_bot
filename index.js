@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const line = require("@line/bot-sdk");
-const NewsApi = require('./api/news_api_controller.js');
 const LineController = require('./line_controller.js');
 
 const PORT = process.env.PORT || 3000;
@@ -24,11 +23,21 @@ function handleEvent(event) {
     if (event.type !== 'message' || event.message.type !== 'text') {
         return Promise.resolve(null);
     }
-    console.log(event.message);
     if (event.message.text == "news") {
+        console.log(event.message);
         var line_controller = new LineController();
-        return line_controller.replyTopNews(client, event);
+        var messages = line_controller.getTopNews();
+        return client.replyMessage(event.replyToken, {
+            type: 'text',
+            text: messages
+        });
     }
+
+    return client.replyMessage(event.replyToken, {
+        type: 'text',
+        text: 'enjoy blockchain!'
+    });
+
 }
 
 app.listen(PORT);

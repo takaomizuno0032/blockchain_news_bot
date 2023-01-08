@@ -30,10 +30,7 @@ class LineController {
             // client.pushMessage(process.env.TO_ID, messages
             // ).then(() => console.log("success")).catch(err => console.log(err));
 
-            client.replyMessage(replyToken, {
-                type: 'text',
-                text: messages
-            })
+            client.replyMessage(replyToken, messages);
         }
         get(this.client, replyToken);
     }

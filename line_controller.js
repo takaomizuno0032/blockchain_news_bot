@@ -6,10 +6,10 @@ class LineController {
         this.client = client;
     }
 
-    getTopNews(event) {
+    getTopNews() {
         var newsApi = new NewsApi();
         var messages = [];
-        var get = async (client, event) => {
+        var get = async (client) => {
             const news = await newsApi.getPoluparNews();
             var title = {
                 type: 'text',
@@ -27,13 +27,10 @@ class LineController {
             messages.push(description)
             messages.push(url);
             console.log(messages);
-            return client.replyMessage(event.replyToken, {
-                type: 'text',
-                text: messages
-            });
-
+            client.pushMessage(process.env.TO_ID, messages
+            ).then(() => console.log("success")).catch(err => console.log(err));
         }
-        get(this.client, event);
+        get(this.client);
     }
 
     // pushNews(client) {

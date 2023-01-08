@@ -24,7 +24,7 @@ class LineController {
         var sendMessage = async (client, replyToken) => {
             const newsList = await newsApi.getHeadlines();
 
-            for (let i = 0; i < newsLists.length; i++) {
+            for (let i = 0; i < newsList.length; i++) {
                 messages = this.createMessage(newsList[i], messages);
             }
 

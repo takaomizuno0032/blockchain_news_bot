@@ -22,7 +22,7 @@ class LineController {
             messages.push(description)
             messages.push(url);
 
-            client.replyMessage(event.replyToken, {
+            return client.replyMessage(event.replyToken, {
                 type: 'text',
                 text: messages
             });

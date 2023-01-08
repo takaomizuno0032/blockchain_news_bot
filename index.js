@@ -27,9 +27,10 @@ function handleEvent(event) {
     console.log(event.message);
     if (event.message.text == "news") {
         var line_controller = new LineController();
-        line_controller.replyTopNews(client, event);
+        return line_controller.replyTopNews(client, event);
     }
-
+    var line_controller = new LineController();
+    return line_controller.replyTopNews(client, event);
 }
 
 app.listen(PORT);

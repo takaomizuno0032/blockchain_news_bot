@@ -1,7 +1,8 @@
 require('dotenv').config();
 const express = require('express');
-const line = require("@line/bot-sdk")
-const NewsApi = require('./api/news_api_controller.js')
+const line = require("@line/bot-sdk");
+const NewsApi = require('./api/news_api_controller.js');
+const LineController = require('./line_controller.js');
 
 const PORT = process.env.PORT || 3000;
 
@@ -25,19 +26,8 @@ function handleEvent(event) {
     }
 
     if (event.message.text == "news") {
-        var newsApi = new NewsApi();
-        var news = newsApi.getTopFiveNews();
-        var messages = [];
-        for (let i = 0; i < news.length; i++) {
-            messages.push(news[i].title);
-            messages.push(news[i].description);
-            messages.push(news[i].url);
-        }
-
-        return client.replyMessage(event.replyToken, {
-            type: 'text',
-            text: messages
-        });
+        var line_controller = new LineController();
+        line_controller.replyTopNews(client, event);
     }
 
 }

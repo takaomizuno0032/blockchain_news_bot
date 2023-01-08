@@ -22,36 +22,33 @@ class NewsApi {
         })
     }
 
-    // get top 5 today's news of blockchain 
-    getTopFiveNews() {
-        today = moment(new Date()).format("YYYY-MM-DD");
-        newsapi.v2.everything({
+    // get top today's news of blockchain 
+    async getPoluparNews() {
+        var news;
+        const today = moment(new Date()).format("YYYY-MM-DD");
+        await newsapi.v2.everything({
             q: 'blockchain',
             from: today,
             to: today,
             sortBy: 'popularity',
-            page: 1,
             language: 'en'
         }).then(res => {
-            // fix to get just top 5 through API if API specification is changed.
             var articles = res.articles;
-            const COUNT = 5;
             var newsList = this.createNewsList(articles);
-            var news;
-            if (newsList.length >= COUNT) {
-                news = newsList.splice(0, COUNT);
-            } else {
-                news = newsList.splice(0, newsList.length);
-            }
-            console.log(news.length, " top news fetched.");
-            return news;
+            var randomIndex = Math.floor(Math.random() * newsList.length);
+            news = newsList[randomIndex]
+            console.log("top news fetched.");
+
         }).catch(error => {
             console.log("error...", error);
+            throw error;
         })
+        return news;
     }
 
     createNewsList(articles) {
         var newsList = [];
+
         for (let i = 0; i < articles.length; i++) {
             var article = articles[i];
             var news = new News(article.title, article.description, article.url);

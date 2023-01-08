@@ -1,7 +1,7 @@
 class News {
-    constructor(title, desicription, url) {
+    constructor(title, description, url) {
         this.title = title;
-        this.desicription = desicription;
+        this.description = description;
         this.url = url;
     }
 }

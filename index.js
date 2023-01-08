@@ -24,7 +24,7 @@ function handleEvent(event) {
     if (event.type !== 'message' || event.message.type !== 'text') {
         return Promise.resolve(null);
     }
-
+    console.log(event.message);
     if (event.message.text == "news") {
         var line_controller = new LineController();
         line_controller.replyTopNews(client, event);

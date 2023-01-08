@@ -15,7 +15,8 @@ app.get('/', (req, res) => res.send("Hello World!"));
 app.post('/webhook', line.middleware(config), (req, res) => {
     Promise
         .all(req.body.events.map(handleEvent))
-        .then((result) => res.json(result));
+        .then((result) => res.json(result))
+        .catch((error) => console.log(error));
 });
 
 const client = new line.Client(config);

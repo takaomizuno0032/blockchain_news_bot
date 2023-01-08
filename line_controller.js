@@ -6,10 +6,10 @@ class LineController {
         this.client = client;
     }
 
-    getTopNews() {
+    getTopNews(replyToken) {
         var newsApi = new NewsApi();
         var messages = [];
-        var get = async (client) => {
+        var get = async (client, replyToken) => {
             const news = await newsApi.getPoluparNews();
             var title = {
                 type: 'text',
@@ -27,10 +27,15 @@ class LineController {
             messages.push(description)
             messages.push(url);
             console.log(messages);
-            client.pushMessage(process.env.TO_ID, messages
-            ).then(() => console.log("success")).catch(err => console.log(err));
+            // client.pushMessage(process.env.TO_ID, messages
+            // ).then(() => console.log("success")).catch(err => console.log(err));
+
+            client.replyMessage(replyToken, {
+                type: 'text',
+                text: 'enjoy blockchain!'
+            })
         }
-        get(this.client);
+        get(this.client, replyToken);
     }
 
     // pushNews(client) {

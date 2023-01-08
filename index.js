@@ -27,7 +27,7 @@ function handleEvent(event) {
     if (event.message.text == "news") {
         console.log(event.message);
         var line_controller = new LineController(client);
-        return line_controller.getTopNews();
+        return line_controller.getTopNews(event.replyToken);
     }
 
     return client.replyMessage(event.replyToken, {

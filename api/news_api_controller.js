@@ -7,8 +7,9 @@ const moment = require('moment');
 
 class NewsApi {
     // get today's headline news of blockchain
-    getHeadlines() {
-        newsapi.v2.topHeadlines({
+    async getHeadlines() {
+        var newsList;
+        await newsapi.v2.topHeadlines({
             q: 'blockchain',
             language: 'en',
             category: 'business'
@@ -16,10 +17,11 @@ class NewsApi {
             var articles = res.articles;
             var newsList = this.createNewsList(articles);
             console.log(newsList.length, " news fetched.");
-            return newsList;
         }).catch(error => {
             console.log("api error...", error);
+            throw error;
         })
+        return newsList;
     }
 
     // get top today's news of blockchain 

@@ -20,14 +20,19 @@ app.post('/webhook', line.middleware(config), (req, res) => {
 });
 
 const client = new line.Client(config);
+const line_controller = new LineController(client);
 function handleEvent(event) {
     if (event.type !== 'message' || event.message.type !== 'text') {
         return Promise.resolve(null);
     }
     if (event.message.text == "news") {
-        console.log(event.message);
-        var line_controller = new LineController(client);
+        console.log("message: ", event.message);
         return line_controller.getTopNews(event.replyToken);
+    }
+
+    if (event.message.text == "headline") {
+        console.log("message: ", event.message);
+        return line_controller.getHeadlines(event.replyToken);
     }
 
     return client.replyMessage(event.replyToken, {

@@ -9,59 +9,48 @@ class LineController {
     getTopNews(replyToken) {
         var newsApi = new NewsApi();
         var messages = [];
-        var get = async (client, replyToken) => {
+        var sendMessage = async (client, replyToken) => {
             const news = await newsApi.getPoluparNews();
-            var title = {
-                type: 'text',
-                text: "Titile: " + news.title
-            }
-            var description = {
-                type: 'text',
-                text: "Description: " + news.description
-            }
-            var url = {
-                type: 'text',
-                text: news.url
-            }
-            messages.push(title);
-            messages.push(description)
-            messages.push(url);
-            console.log(messages);
-            // client.pushMessage(process.env.TO_ID, messages
-            // ).then(() => console.log("success")).catch(err => console.log(err));
+            messages = this.createMessage(news, messages);
 
             client.replyMessage(replyToken, messages);
         }
-        get(this.client, replyToken);
+        sendMessage(this.client, replyToken);
     }
 
-    // pushNews(client) {
-    //     var newsApi = new NewsApi();
-    //     var messages = [];
-    //     var reply = async () => {
-    //         const news = await newsApi.getPoluparNews();
-    //         var title = {
-    //             type: 'text',
-    //             text: "Titile: " + news.title
-    //         }
-    //         var description = {
-    //             type: 'text',
-    //             text: "Description: " + news.description
-    //         }
-    //         var url = {
-    //             type: 'text',
-    //             text: news.url
-    //         }
-    //         messages.push(title);
-    //         messages.push(description)
-    //         messages.push(url);
+    getHeadlines(replyToken) {
+        var newsApi = new NewsApi();
+        var messages = [];
+        var sendMessage = async (client, replyToken) => {
+            const newsList = await newsApi.getHeadlines();
 
-    //         client.pushMessage("Ud3d86cb084fe75dcef808c1cceb7c025", messages
-    //         ).then(() => console.log("success")).catch(err => console.log(err));
+            for (let i = 0; i < newsLists.length; i++) {
+                messages = this.createMessage(newsList[i], messages);
+            }
 
-    //     }
-    //     reply();
-    // }
+            client.replyMessage(replyToken, messages);
+        }
+        sendMessage(this.client, replyToken);
+    }
+
+    createMessage(news, messages) {
+        var title = {
+            type: 'text',
+            text: "Titile: " + news.title
+        }
+        var description = {
+            type: 'text',
+            text: "Description: " + news.description
+        }
+        var url = {
+            type: 'text',
+            text: news.url
+        }
+        messages.push(title);
+        messages.push(description)
+        messages.push(url);
+        return messages;
+    }
 }
 
 module.exports = LineController;

@@ -4,7 +4,7 @@ class LineController {
     replyTopNews(client, event) {
         var newsApi = new NewsApi();
         var messages = [];
-        var reply = async () => {
+        var reply = async (event) => {
             const news = await newsApi.getPoluparNews();
             var title = {
                 type: 'text',
@@ -27,7 +27,7 @@ class LineController {
                 text: messages
             });
         }
-        reply();
+        reply(event);
     }
 
     // pushNews(client) {

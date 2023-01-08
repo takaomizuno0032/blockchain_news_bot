@@ -32,7 +32,7 @@ class LineController {
 
             client.replyMessage(replyToken, {
                 type: 'text',
-                text: 'enjoy blockchain!'
+                text: messages
             })
         }
         get(this.client, replyToken);

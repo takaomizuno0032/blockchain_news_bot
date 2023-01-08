@@ -29,8 +29,6 @@ function handleEvent(event) {
         var line_controller = new LineController();
         return line_controller.replyTopNews(client, event);
     }
-    var line_controller = new LineController();
-    return line_controller.replyTopNews(client, event);
 }
 
 app.listen(PORT);

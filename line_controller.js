@@ -15,7 +15,7 @@ class LineController {
             if (news != undefined) {
                 var content = {
                     type: 'text',
-                    text: "Titile: " + news.title + "\n" + "Description: " + news.description + "\n" + "URL: " + news.url
+                    text: "Titile: " + news.title + "\n\n" + "Description: " + news.description + "\n\n" + "URL: " + news.url
                 }
                 messages.push(content);
             } else {
@@ -48,7 +48,7 @@ class LineController {
 
                     var content = {
                         type: 'text',
-                        text: "Titile: " + newsList[i].title + "\n" + "Description: " + newsList[i].description + "\n" + "URL: " + newsList[i].url
+                        text: "Titile: " + newsList[i].title + "\n\n" + "Description: " + newsList[i].description + "\n\n" + "URL: " + newsList[i].url
                     }
                     messages.push(content);
                 }

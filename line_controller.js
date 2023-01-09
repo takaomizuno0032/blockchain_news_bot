@@ -12,13 +12,27 @@ class LineController {
         var sendMessage = async (client, replyToken) => {
             const news = await newsApi.getPoluparNews();
             console.log(news);
-            messages = this.createMessage(news, messages);
-            if (messages.length = 0) {
-                var content = {
+            if (news != undefined) {
+                var title = {
+                    type: 'text',
+                    text: "Titile: " + news.title
+                }
+                var description = {
+                    type: 'text',
+                    text: "Description: " + news.description
+                }
+                var url = {
+                    type: 'text',
+                    text: news.url
+                }
+                messages.push(title);
+                messages.push(description)
+                messages.push(url);
+            } else {
+                messages = [{
                     type: 'text',
                     text: 'no news'
-                }
-                messages.push(content);
+                }]
             }
 
             client.replyMessage(replyToken, messages);

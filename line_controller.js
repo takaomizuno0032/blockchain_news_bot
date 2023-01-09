@@ -47,7 +47,21 @@ class LineController {
             const newsList = await newsApi.getHeadlines();
             console.log("newsList: ", newsList);
             for (let i = 0; i < newsList?.length; i++) {
-                messages = this.createMessage(newsList[i], messages);
+                var title = {
+                    type: 'text',
+                    text: "Titile: " + newsList[i].title
+                }
+                var description = {
+                    type: 'text',
+                    text: "Description: " + newsList[i].description
+                }
+                var url = {
+                    type: 'text',
+                    text: newsList[i].url
+                }
+                messages.push(title);
+                messages.push(description)
+                messages.push(url);
             }
             if (messages.length = 0) {
                 var content = {
@@ -60,25 +74,6 @@ class LineController {
             client.replyMessage(replyToken, messages);
         }
         sendMessage(this.client, replyToken);
-    }
-
-    createMessage(news, messages) {
-        var title = {
-            type: 'text',
-            text: "Titile: " + news.title
-        }
-        var description = {
-            type: 'text',
-            text: "Description: " + news.description
-        }
-        var url = {
-            type: 'text',
-            text: news.url
-        }
-        messages.push(title);
-        messages.push(description)
-        messages.push(url);
-        return messages;
     }
 }
 

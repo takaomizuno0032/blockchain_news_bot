@@ -15,7 +15,7 @@ class NewsApi {
             category: 'business'
         }).then(res => {
             var articles = res.articles;
-            var newsList = this.createNewsList(articles);
+            newsList = this.createNewsList(articles);
             console.log(newsList.length, " news fetched.");
         }).catch(error => {
             console.log("api error...", error);

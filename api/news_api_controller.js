@@ -8,7 +8,7 @@ const moment = require('moment');
 class NewsApi {
     // get today's headline news of blockchain
     async getHeadlines() {
-        var newsList;
+        var newsList = [];
         await newsapi.v2.topHeadlines({
             q: 'blockchain',
             language: 'en',

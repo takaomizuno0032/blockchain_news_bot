@@ -12,6 +12,12 @@ class LineController {
         var sendMessage = async (client, replyToken) => {
             const news = await newsApi.getPoluparNews();
             messages = this.createMessage(news, messages);
+            if (messages.length = 0) {
+                messages = {
+                    type: 'text',
+                    text: 'no news'
+                }
+            }
 
             client.replyMessage(replyToken, messages);
         }
@@ -24,8 +30,14 @@ class LineController {
         var sendMessage = async (client, replyToken) => {
             const newsList = await newsApi.getHeadlines();
 
-            for (let i = 0; i < newsList.length; i++) {
+            for (let i = 0; i < newsList?.length; i++) {
                 messages = this.createMessage(newsList[i], messages);
+            }
+            if (messages.length = 0) {
+                messages = {
+                    type: 'text',
+                    text: 'no news'
+                }
             }
 
             client.replyMessage(replyToken, messages);

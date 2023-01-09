@@ -15,7 +15,7 @@ class LineController {
             if (news != undefined) {
                 var content = {
                     type: 'text',
-                    text: "Titile: " + news.title + "\n\n" + "Description: " + news.description + "\n\n" + "URL: " + news.url
+                    text: "Title: " + news.title + "\n\n" + "Description: " + news.description + "\n\n" + "URL: " + news.url
                 }
                 messages.push(content);
             } else {

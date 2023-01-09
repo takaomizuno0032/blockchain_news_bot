@@ -45,9 +45,9 @@ class LineController {
         var sendMessage = async (client, replyToken) => {
             const newsList = await newsApi.getHeadlines();
             console.log("newsList: ", newsList);
+            var messages = [];
             if (newsList != undefined) {
                 for (let i = 0; i < newsList.length; i++) {
-                    var messages = [];
 
                     var title = {
                         type: 'text',
@@ -64,7 +64,6 @@ class LineController {
                     messages.push(title);
                     messages.push(description)
                     messages.push(url);
-                    client.replyMessage(replyToken, messages);
                 }
 
             }
@@ -73,8 +72,8 @@ class LineController {
                     type: 'text',
                     text: 'no news'
                 }]
-                client.replyMessage(replyToken, messages);
             }
+            client.replyMessage(replyToken, messages);
 
         }
         sendMessage(this.client, replyToken);

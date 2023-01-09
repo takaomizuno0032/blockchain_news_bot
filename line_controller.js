@@ -6,17 +6,19 @@ class LineController {
         this.client = client;
     }
 
-    getTopNews(replyToken) {
+    sendTopNews(replyToken) {
         var newsApi = new NewsApi();
         var messages = [];
         var sendMessage = async (client, replyToken) => {
             const news = await newsApi.getPoluparNews();
+            console.log(news);
             messages = this.createMessage(news, messages);
             if (messages.length = 0) {
-                messages = {
+                var content = {
                     type: 'text',
                     text: 'no news'
                 }
+                messages.push(content);
             }
 
             client.replyMessage(replyToken, messages);
@@ -24,20 +26,21 @@ class LineController {
         sendMessage(this.client, replyToken);
     }
 
-    getHeadlines(replyToken) {
+    sendHeadlines(replyToken) {
         var newsApi = new NewsApi();
         var messages = [];
         var sendMessage = async (client, replyToken) => {
             const newsList = await newsApi.getHeadlines();
-
+            console.log("newsList: ", newsList);
             for (let i = 0; i < newsList?.length; i++) {
                 messages = this.createMessage(newsList[i], messages);
             }
             if (messages.length = 0) {
-                messages = {
+                var content = {
                     type: 'text',
                     text: 'no news'
                 }
+                messages.push(content);
             }
 
             client.replyMessage(replyToken, messages);

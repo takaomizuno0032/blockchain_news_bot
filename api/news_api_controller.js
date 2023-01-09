@@ -21,6 +21,7 @@ class NewsApi {
             console.log("api error...", error);
             throw error;
         })
+        console.log("news return", newsList);
         return newsList;
     }
 
@@ -45,6 +46,7 @@ class NewsApi {
             console.log("error...", error);
             throw error;
         })
+        console.log("news return: ", news);
         return news;
     }
 

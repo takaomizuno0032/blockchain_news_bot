@@ -27,12 +27,12 @@ function handleEvent(event) {
     }
     if (event.message.text == "news") {
         console.log("message: ", event.message);
-        return line_controller.getTopNews(event.replyToken);
+        return line_controller.sendTopNews(event.replyToken);
     }
 
     if (event.message.text == "headline") {
         console.log("message: ", event.message);
-        return line_controller.getHeadlines(event.replyToken);
+        return line_controller.sendHeadlines(event.replyToken);
     }
 
     return client.replyMessage(event.replyToken, {

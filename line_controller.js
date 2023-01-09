@@ -13,21 +13,11 @@ class LineController {
             const news = await newsApi.getPoluparNews();
             console.log(news);
             if (news != undefined) {
-                var title = {
+                var content = {
                     type: 'text',
-                    text: "Titile: " + news.title
+                    text: "Titile: " + news.title + "\n" + "Description: " + news.description + "\n" + "URL: " + news.url
                 }
-                var description = {
-                    type: 'text',
-                    text: "Description: " + news.description
-                }
-                var url = {
-                    type: 'text',
-                    text: news.url
-                }
-                messages.push(title);
-                messages.push(description)
-                messages.push(url);
+                messages.push(content);
             } else {
                 messages = [{
                     type: 'text',
@@ -35,7 +25,13 @@ class LineController {
                 }]
             }
 
-            client.replyMessage(replyToken, messages);
+            client.replyMessage(replyToken, messages).then(() => {
+                console.log("success");
+            }
+            ).catch((error) => {
+                console.log("error: ", error);
+            });
+
         }
         sendMessage(this.client, replyToken);
     }
@@ -44,26 +40,17 @@ class LineController {
         var newsApi = new NewsApi();
         var sendMessage = async (client, replyToken) => {
             const newsList = await newsApi.getHeadlines();
+            const MAX_NEWS_NUM = 5;
             console.log("newsList: ", newsList);
             var messages = [];
             if (newsList != undefined) {
-                for (let i = 0; i < newsList.length; i++) {
+                for (let i = 0; i < newsList.length & i < MAX_NEWS_NUM; i++) {
 
-                    var title = {
+                    var content = {
                         type: 'text',
-                        text: "Titile: " + newsList[i].title
+                        text: "Titile: " + newsList[i].title + "\n" + "Description: " + newsList[i].description + "\n" + "URL: " + newsList[i].url
                     }
-                    var description = {
-                        type: 'text',
-                        text: "Description: " + newsList[i].description
-                    }
-                    var url = {
-                        type: 'text',
-                        text: newsList[i].url
-                    }
-                    messages.push(title);
-                    messages.push(description)
-                    messages.push(url);
+                    messages.push(content);
                 }
 
             }
@@ -73,7 +60,12 @@ class LineController {
                     text: 'no news'
                 }]
             }
-            client.replyMessage(replyToken, messages);
+            client.replyMessage(replyToken, messages).then(() => {
+                console.log("success");
+            }
+            ).catch((error) => {
+                console.log("error: ", error);
+            });
 
         }
         sendMessage(this.client, replyToken);

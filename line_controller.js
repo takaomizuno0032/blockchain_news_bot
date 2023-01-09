@@ -43,7 +43,7 @@ class LineController {
             const MAX_NEWS_NUM = 5;
             console.log("newsList: ", newsList);
             var messages = [];
-            if (newsList != undefined) {
+            if (newsList != undefined & newsList?.length > 0) {
                 for (let i = 0; i < newsList.length & i < MAX_NEWS_NUM; i++) {
 
                     var content = {

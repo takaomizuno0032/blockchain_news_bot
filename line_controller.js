@@ -50,8 +50,8 @@ class LineController {
             var messages = [];
             if (newsList != undefined & newsList?.length > 0) {
                 for (let i = 0; i < newsList.length & i < MAX_NEWS_NUM; i++) {
-                    var jaTitle = await translator.translate(news.title, "en", "ja");
-                    var jaDes = await translator.translate(news.description, "en", "ja");
+                    var jaTitle = await translator.translate(newsList[i].title, "en", "ja");
+                    var jaDes = await translator.translate(newsList[i].description, "en", "ja");
                     var content = {
                         type: 'text',
                         text: "Titile: " + newsList[i].title + "\n" + "日本語: " + jaTitle + "\n\n" + "Description: " + newsList[i].description + "\n" + "日本語: " + jaDes + "\n\n" + "URL: " + newsList[i].url
